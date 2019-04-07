@@ -1,0 +1,33 @@
+<!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>{{ site.description | safe }}</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item{% if '/' == page.url %} active{% endif %}" href="{{ '/' | url }}">Home</a>
+
+    {#
+      The code below dynamically generates a sidebar nav of pages with
+      `layout: page` in the front-matter. See readme for usage.
+    #}
+
+    {% for item in collections.pages %}
+      <a class="sidebar-nav-item{% if item.url == page.url %} active{% endif %}" href="{{ item.url | url }}">{{ item.data.title }}</a>
+    {% endfor %}
+
+    <a class="sidebar-nav-item" href="{{ repoUrl }}/archive/v{{ pkg.version }}.zip">Download</a>
+    <a class="sidebar-nav-item" href="{{ repoUrl }}">GitHub project</a>
+    <span class="sidebar-nav-item">Currently v{{ pkg.version }}</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; {{ year }}. All rights reserved.
+    </p>
+  </div>
+</div>

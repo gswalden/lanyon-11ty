@@ -1,0 +1,26 @@
+---
+layout: default
+permalink: /{{ page.date | dateToFolders }}/{{ page.fileSlug }}/index.html
+---
+
+<div class="post">
+  <h1 class="post-title">{{ title }}</h1>
+  <span class="post-date">{{ page.date | dateToString }}</span>
+  {{ content | safe }}
+</div>
+
+<div class="related">
+  <h2>Latest Posts</h2>
+  <ul class="related-posts">
+    {% for post in collections.posts | latest(3, page.url) %}
+      <li>
+        <h3>
+          <a href="{{ post.url | url }}">
+            {{ post.data.title }}
+            <small>{{ post.date | dateToString }}</small>
+          </a>
+        </h3>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
