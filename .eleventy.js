@@ -27,7 +27,7 @@ module.exports = function(eleventyConfig) {
     return latest;
   });
 
-  for (const f of ['css', 'public', 'atom.njk']) {
+  for (const f of ['css', 'public']) {
     eleventyConfig.addPassthroughCopy(f);
   }
 
