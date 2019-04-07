@@ -2,12 +2,19 @@ const { readFileSync } = require('fs');
 const { DateTime } = require('luxon');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
 
+function format(date, str) {
+  return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat(str);
+}
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('dateToString', (date) => {
-    return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('dd LLL yyyy'); // 09 Oct 1986
+    return format(date, 'dd LLL yyyy'); // 09 Oct 1986
+  });
+  eleventyConfig.addFilter('htmlDateString', (date) => {
+    return format(date, 'yyyy-LL-dd'); // 1986-10-09
   });
   eleventyConfig.addFilter('dateToFolders', (date) => {
-    return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat('yyyy/LL/dd'); // 1986/10/09
+    return format(date, 'yyyy/LL/dd'); // 1986/10/09
   });
   eleventyConfig.addFilter('latest', (posts, num = 3, skip = '') => {
     const latest = [];
